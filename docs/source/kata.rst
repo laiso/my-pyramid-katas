@@ -46,9 +46,11 @@ waitressをインストール::
 
   waitress-server -h
 
+wsgiアプリケーション
+
 .. literalinclude:: wsgiapp.py
    :language: python
-   :caption: wsgiアプリケーション
+
 
 Webアプリケーションを実行::
 
@@ -63,13 +65,16 @@ webobをインストール::
   pip wheel webob -f wheelhouse
   pip install webob -f wheelhouse
 
+webobを使ったwsgiアプリケーション
+
 .. literalinclude:: webobapp.py
    :language: python
-   :caption: webobを使ったwsgiアプリケーション
+
+
+webob.dec.wsgifyを使ったwsgiアプリケーション
 
 .. literalinclude:: webobdecapp.py
    :language: python
-   :caption: webob.dec.wsgifyを使ったwsgiアプリケーション
 
 pyramid
 ----------------------------
@@ -79,9 +84,11 @@ pyramidをインストール::
   pip wheel -f wheelhouse pyramid
   pip install -f wheelhouse pyramid
 
+pyramidの最小アプリケーション
+
 .. literalinclude:: pyramidminapp.py
    :language: python
-   :caption: pyramidの最小アプリケーション
+
 
 pyramidアプリケーションのモジュール化
 ------------------------------------------------
@@ -94,18 +101,24 @@ pyramidアプリケーションのモジュール化
   - views.py
 
 
+__init__.py: アプリケーションのエントリポイント
+
 .. literalinclude:: myapp1/__init__.py
    :language: python
-   :caption: __init__.py: アプリケーションのエントリポイント
+
+
+views.py: webアプリケーションビュー
 
 .. literalinclude:: myapp1/views.py
    :language: python
-   :caption: views.py: webアプリケーションビュー
 
+
+
+wsgi.py: wsgiアプリケーションの生成
 
 .. literalinclude:: myapp1/wsgi.py
    :language: python
-   :caption: wsgi.py: wsgiアプリケーションの生成
+
 
 URLディスパッチ
 ------------------------------
@@ -116,13 +129,16 @@ URLディスパッチ
   - wsgi.py
   - views.py
 
+ __init__.py: add_routeでURLパターン登録
+
 .. literalinclude:: myapp2/__init__.py
    :language: python
-   :caption: __init__.py: add_routeでURLパターン登録
+
+views.py: view_configによるroute割り当て
 
 .. literalinclude:: myapp2/views.py
    :language: python
-   :caption: views.py: view_configによるroute割り当て
+
 
 
 wsgi.pyはmyapp1と同じ
@@ -146,20 +162,23 @@ pyramid_jinja2をインストール::
     - index.jinja2
     - user.jinja2
 
+__init__.py: pyramid_jinja2 を include
+
 .. literalinclude:: myapp3/__init__.py
    :language: python
-   :caption: __init__.py: pyramid_jinja2 を include
+
+
+views.py: view_configのrendererでテンプレートを指定
 
 .. literalinclude:: myapp3/views.py
    :language: python
-   :caption: views.py: view_configのrendererでテンプレートを指定
 
-.. literalinclude:: myapp3/templates/index.jinja2
-   :language: html
-   :caption: テンプレート
+
+
+ビューから渡された値(username) をテンプレート内で使用
 
 .. literalinclude:: myapp3/templates/user.jinja2
-   :caption: ビューから渡された値(username) をテンプレート内で使用
+   :language: html
 
 データベースアクセス
 --------------------------------
@@ -180,24 +199,34 @@ pyramid_sqlalchemyとpyramid_tmのインストール::
     - index.jinja2
     - user.jinja2
 
+__init__.py: pyramid_sqlalchemy, pyramid_tm を include
+
 .. literalinclude:: myapp4/__init__.py
    :language: python
-   :caption: __init__.py: pyramid_sqlalchemy, pyramid_tm を include
+
+
+wsgi.py: sqlalchemy.url にデータベース接続を設定
 
 .. literalinclude:: myapp4/wsgi.py
    :language: python
-   :caption: __init__.py: sqlalchemy.url にデータベース接続を設定
+
+
+models.py: モデル定義
 
 .. literalinclude:: myapp4/models.py
    :language: python
-   :caption: モデル定義
+
+
+views.py: User.query でデータベースからモデルを取得
 
 .. literalinclude:: myapp4/views.py
    :language: python
-   :caption: views.py: User.query でデータベースからモデルを取得
+
+
+user.jinja2: ビューから渡されたuserのプロパティアクセス
 
 .. literalinclude:: myapp4/templates/user.jinja2
-   :caption: ビューから渡されたuserのプロパティアクセス
+   :language: html
 
 
 データベース、テーブル作成::
@@ -239,16 +268,22 @@ pyramid_deform colanderalchemy のインストール::
     - user.jinja2
 
 
+__init__.py: pyramid_deform を include
+
 .. literalinclude:: myapp5/__init__.py
    :language: python
-   :caption: __init__.py: pyramid_deform を include
+
+
+views.py: FormViewを使ってdeformを使うビューを定義
 
 .. literalinclude:: myapp5/views.py
    :language: python
-   :caption: views.py: FormViewを使ってdeformを使うビューを定義
+
+
+new_user.jinja2: フォームの表示
 
 .. literalinclude:: myapp5/templates/new_user.jinja2
-   :caption: フォームの表示
+   :language: python
 
 
 レイアウトとスタイル
@@ -274,19 +309,26 @@ pyramid_layout のインストール::
     - users.jinja2
     - user.jinja2
 
+__init__.py: pyramid_layout を include
+
 .. literalinclude:: myapp6/__init__.py
    :language: python
-   :caption: __init__.py: pyramid_layout を include
+
+
+layouts.py: BaseLayoutを定義
 
 .. literalinclude:: myapp6/layouts.py
    :language: python
-   :caption: layouts.py: BaseLayoutを定義
+
+BaseLayoutで使うレイアウト
 
 .. literalinclude:: myapp6/templates/base.jinja2
-   :caption: BaseLayoutで使うレイアウト
+   :language: html
+
+レイアウトで提供されるテンプレートを継承する(その他のテンプレートでも同様)
 
 .. literalinclude:: myapp6/templates/index.jinja2
-   :caption: レイアウトで提供されるテンプレートを継承する(その他のテンプレートでも同様)
+   :language: html
 
 
 スキーママイグレーション
@@ -317,13 +359,16 @@ alembicのインストール::
 
   alembic init alembic
 
+alembic.ini マイグレーション設定 sqlalchemy.url に接続文字列を設定する
+
 .. literalinclude:: alembic.ini
    :language: ini
-   :caption: マイグレーション設定 sqlalchemy.url に接続文字列を設定する
+
+
+alembic/env.py: target_schemaにアプリケーションモデルのmetadataを設定
 
 .. literalinclude:: alembic/env.py
    :language: python
-   :caption: alembic/env.py の target_schemaにアプリケーションモデルのmetadataを設定
    :lines: 18-19
 
 初期のスキーマリビジョンを作成::
@@ -335,8 +380,10 @@ alembicのインストール::
   alembic upgrade head
   alembic history
 
+models.py: モデルに項目(birthday) 追加
+
 .. literalinclude:: myapp7/models.py
-   :caption: models.py: モデルに項目(birthday) 追加
+   :language: python
 
 追加した項目分のリビジョンを作成::
 
