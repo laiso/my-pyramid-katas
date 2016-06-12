@@ -44,7 +44,7 @@ waitressをインストール::
 
 インストール確認::
 
-  waitress-server -h
+  waitress-serve -h
 
 wsgiアプリケーション
 
